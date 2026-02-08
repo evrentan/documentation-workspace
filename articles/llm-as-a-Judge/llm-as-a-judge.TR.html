@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LLM-as-a-Judge</title>
+    <title>Yazılım Yaşam Döngüsünde Otonom Kalite Güvencesi İçin LLM-as-a-Judge</title>
     <style>
         body {
             font-family: system-ui, -apple-system, sans-serif;
@@ -105,7 +105,7 @@
             sayede, hakem, kodun sadece sözdizimsel doğruluğunu değil, mimari uyumunu ve iş mantığını da &quot;akıl
             yürüterek&quot; denetleyebilir.</li>
     </ul>
-    <h2>2. Paradigma Değişimi: Geleneksel CI/CD vs. LLM-as-a-Judge</h2>
+    <h2>2. Paradigm Shift: Geleneksel CI/CD vs. LLM-as-a-Judge</h2>
     <p>2026&#39;nın modern geliştirme hattı hem geleneksel hem de LLM tabanlı kontrolleri birleştirir; ancak roller
         keskindir. Geleneksel CI/CD araçları (Linter, Unit Test) kodun sözdizimsel doğruluğunu ve test kapsamını kontrol
         ederken, LLM-as-a-Judge mimarisi kodun mimari uyumunu ve iş mantığını &quot;akıl yürüterek&quot; denetler.</p>
@@ -121,28 +121,28 @@
         <tbody>
             <tr>
                 <td align="left"><strong>Analiz Yöntemi</strong></td>
-                <td align="left">Deterministik ve Kural Bazlı.</td>
-                <td align="left">Sezgisel ve Bağlamsal.</td>
+                <td align="left">Deterministik ve Kural Bazlı</td>
+                <td align="left">Sezgisel ve Bağlamsal</td>
             </tr>
             <tr>
                 <td align="left"><strong>Hata Yakalama</strong></td>
-                <td align="left">Syntax hataları, test coverage, bilinen CVE&#39;ler.</td>
-                <td align="left">Mimari sızıntılar, mantıksal güvenlik açıkları (IDOR), tasarım hataları.</td>
+                <td align="left">Syntax hataları, test coverage, bilinen CVE&#39;ler</td>
+                <td align="left">Mimari sızıntılar, mantıksal güvenlik açıkları (IDOR), tasarım hataları</td>
             </tr>
             <tr>
                 <td align="left"><strong>Geri Bildirim</strong></td>
-                <td align="left">Statik rapor (&quot;Line 42: Unused variable&quot;).</td>
-                <td align="left">Narratif ve Eğitici rapor (&quot;Bu yaklaşım O(n^2) riskine sahip&quot;).</td>
+                <td align="left">Statik rapor (&quot;Line 42: Unused variable&quot;)</td>
+                <td align="left">Narratif ve Eğitici rapor (&quot;Bu yaklaşım O(n^2) riskine sahip&quot;)</td>
             </tr>
             <tr>
                 <td align="left"><strong>Kod Okunabilirliği</strong></td>
-                <td align="left">Standart isimlendirme kuralları (CamelCase vb.).</td>
-                <td align="left">Domain diline (Ubiquitous Language) uyum analizi.</td>
+                <td align="left">Standart isimlendirme kuralları (CamelCase vb.)</td>
+                <td align="left">Domain diline (Ubiquitous Language) uyum analizi</td>
             </tr>
             <tr>
                 <td align="left"><strong>Kapsam</strong></td>
-                <td align="left">Sadece o anki dosya veya diff.</td>
-                <td align="left">Tüm repository, ADR belgeleri ve teknik borçlar.</td>
+                <td align="left">Sadece o anki dosya veya diff</td>
+                <td align="left">Tüm repository, ADR belgeleri ve teknik borçlar</td>
             </tr>
         </tbody>
     </table>
@@ -187,27 +187,27 @@
         <tbody>
             <tr>
                 <td align="left"><strong>Resilience</strong></td>
-                <td align="left">Zaman aşımı (Timeout) tanımlanmamış.</td>
-                <td align="left">Retry mekanizması var ama backoff eksik.</td>
-                <td align="left">Circuit Breaker ve Bulkhead tam uygulanmış.</td>
+                <td align="left">Zaman aşımı (Timeout) tanımlanmamış</td>
+                <td align="left">Retry mekanizması var ama backoff eksik</td>
+                <td align="left">Circuit Breaker ve Bulkhead tam uygulanmış</td>
             </tr>
             <tr>
                 <td align="left"><strong>Bilişsel Yük</strong></td>
-                <td align="left">Mantıksal akış doğrusal değil.</td>
-                <td align="left">Modüler ama soyutlama tutarsız.</td>
-                <td align="left">Temiz kod prensiplerine tam uyum.</td>
+                <td align="left">Mantıksal akış doğrusal değil</td>
+                <td align="left">Modüler ama soyutlama tutarsız</td>
+                <td align="left">Temiz kod prensiplerine tam uyum</td>
             </tr>
             <tr>
                 <td align="left"><strong>Domain Integrity</strong></td>
-                <td align="left">Alan modelleri DB şemasıyla iç içe.</td>
-                <td align="left">Domain dili var ama iş kuralları sızmış.</td>
-                <td align="left">DDD ve Ubiquitous Language&#39;e tam uyum.</td>
+                <td align="left">Alan modelleri DB şemasıyla iç içe</td>
+                <td align="left">Domain dili var ama iş kuralları sızmış</td>
+                <td align="left">DDD ve Ubiquitous Language&#39;e tam uyum</td>
             </tr>
             <tr>
                 <td align="left"><strong>Mimari Sınırlar</strong></td>
-                <td align="left">Hücre dışı (Cross-cell) DB/API erişimi var.</td>
-                <td align="left">Erişim var ama asenkron/proxy ile yapılmış.</td>
-                <td align="left">Hücresel Mimari sınırlarına tam uyum.</td>
+                <td align="left">Hücre dışı (Cross-cell) DB/API erişimi var</td>
+                <td align="left">Erişim var ama asenkron/proxy ile yapılmış</td>
+                <td align="left">Hücresel Mimari sınırlarına tam uyum</td>
             </tr>
         </tbody>
     </table>

@@ -38,11 +38,11 @@ Aşağıdaki tabloda, geleneksel CI/CD ve LLM-as-a-Judge mimarilerinin karşıla
 
 | Karşılaştırma Alanı | Geleneksel CI/CD (Linter, Unit Test) | LLM-as-a-Judge (Bilişsel Denetim) |
 | :--- | :--- | :--- |
-| **Analiz Yöntemi** | Deterministik ve Kural Bazlı. | Sezgisel ve Bağlamsal. |
-| **Hata Yakalama** | Syntax hataları, test coverage, bilinen CVE'ler. | Mimari sızıntılar, mantıksal güvenlik açıkları (IDOR), tasarım hataları. |
-| **Geri Bildirim** | Statik rapor ("Line 42: Unused variable"). | Narratif ve Eğitici rapor ("Bu yaklaşım O(n^2) riskine sahip"). |
-| **Kod Okunabilirliği** | Standart isimlendirme kuralları (CamelCase vb.). | Domain diline (Ubiquitous Language) uyum analizi. |
-| **Kapsam** | Sadece o anki dosya veya diff. | Tüm repository, ADR belgeleri ve teknik borçlar. |
+| **Analiz Yöntemi** | Deterministik ve Kural Bazlı | Sezgisel ve Bağlamsal |
+| **Hata Yakalama** | Syntax hataları, test coverage, bilinen CVE'ler | Mimari sızıntılar, mantıksal güvenlik açıkları (IDOR), tasarım hataları |
+| **Geri Bildirim** | Statik rapor ("Line 42: Unused variable") | Narratif ve Eğitici rapor ("Bu yaklaşım O(n^2) riskine sahip") |
+| **Kod Okunabilirliği** | Standart isimlendirme kuralları (CamelCase vb.) | Domain diline (Ubiquitous Language) uyum analizi |
+| **Kapsam** | Sadece o anki dosya veya diff | Tüm repository, ADR belgeleri ve teknik borçlar |
 
 ## 3. Akıl Yürütme İzlenebilirliği (Reasoning Traceability)
 
@@ -70,10 +70,10 @@ Peki rubric nedir ve nasıl tasarlanır? Rubric, hakemin kod kalitesini değerle
 
 | Kriter | 1 Puan (Red) | 3 Puan (Geliştirilmeli) | 5 Puan (Onay) |
 | :--- | :--- | :--- | :--- |
-| **Resilience** | Zaman aşımı (Timeout) tanımlanmamış. | Retry mekanizması var ama backoff eksik. | Circuit Breaker ve Bulkhead tam uygulanmış. |
-| **Bilişsel Yük** | Mantıksal akış doğrusal değil. | Modüler ama soyutlama tutarsız. | Temiz kod prensiplerine tam uyum. |
-| **Domain Integrity** | Alan modelleri DB şemasıyla iç içe. | Domain dili var ama iş kuralları sızmış. | DDD ve Ubiquitous Language'e tam uyum. |
-| **Mimari Sınırlar** | Hücre dışı (Cross-cell) DB/API erişimi var. | Erişim var ama asenkron/proxy ile yapılmış. | Hücresel Mimari sınırlarına tam uyum. |
+| **Resilience** | Zaman aşımı (Timeout) tanımlanmamış | Retry mekanizması var ama backoff eksik | Circuit Breaker ve Bulkhead tam uygulanmış |
+| **Bilişsel Yük** | Mantıksal akış doğrusal değil | Modüler ama soyutlama tutarsız | Temiz kod prensiplerine tam uyum |
+| **Domain Integrity** | Alan modelleri DB şemasıyla iç içe | Domain dili var ama iş kuralları sızmış | DDD ve Ubiquitous Language'e tam uyum |
+| **Mimari Sınırlar** | Hücre dışı (Cross-cell) DB/API erişimi var | Erişim var ama asenkron/proxy ile yapılmış | Hücresel Mimari sınırlarına tam uyum |
 
 Bu puanlama sistemi, hakemin kod kalitesini daha doğru bir şekilde değerlendirmesini sağlar. 
 
