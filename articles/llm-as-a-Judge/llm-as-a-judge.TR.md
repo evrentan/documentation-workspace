@@ -8,29 +8,33 @@ Yazılım dünyası olarak 2025 yılında, saniyeler içinde devasa miktarda kod
 
 Geleneksel kalite kapıları (Quality Gates) genellikle statik analizlere dayanırken, Bilişsel Kalite Kapısı (Cognitive Quality Gate), kodun sadece sözdizimsel doğruluğunu değil, mimari uyumunu ve iş mantığını da "akıl yürüterek" denetleyen yeni nesil bir kontrol mekanizmasıdır.
 
-LLM-as-a-Judge, basit bir "prompt" değil; yazılım teslimat sürecine stratejik olarak yerleştirilmiş çok aşamalı bir bilişsel fabrikadır. Bu katman, ham kodu alıp onu bir mimari süzgeçten geçirerek nihai bir karara dönüştürür. Süreç üç ana teknik aşamadan oluşur:
+LLM-as-a-Judge, basit bir "prompt" değil; yazılım teslimat sürecine stratejik olarak yerleştirilmiş çok aşamalı bir bilişsel denetim mekanizmasıdır. Bu katman, geliştiriciler ya da AI tarafından üretilen ham kodu alıp onu bir mimari süzgeçten geçirerek nihai bir karara dönüştürür. Bu katman, yazılım teslimat sürecine stratejik olarak yerleştirilmiş çok aşamalı bir bilişsel denetim mekanizmasıdır. 
 
 ![LLM-as-a-Judge Architecture](llm-as-a-judge-dark.png)
 
+Süreç üç ana teknik aşamadan oluşur; code & context ingestion (bağlamsal veri girişi), multi-stage reasoning (çok aşamalı akıl yürütme) ve decision & feedback generation (karar ve geri bildirim üretimi). Gelin bu aşamaları sırasıyla inceleyelim.
+
 ### Code & Context Ingestion (Bağlamsal Veri Girişi)
 Bu aşama, "Hakem"in sadece önüne gelen kod satırlarına değil, o kodun içinde yaşadığı tüm ekosisteme hakim olmasını sağlar.
-*   **ADR & Standart Entegrasyonu:** Hakem, şirketin Architectural Decision Records (ADR) dosyalarını ve kodlama standartlarını sisteme yükler.
-*   **Knowledge Graph Oluşturma:** Sadece değişen dosyayı değil; o dosyanın etkilediği diğer sınıfları, veri tabanı şemalarını ve bağımlılıkları bir "bağlam grafiği" olarak analiz eder.
-*   **Rubric Injection:** Önceden tanımladığımız değerlendirme matrisleri (Rubrics), bu aşamada modele hangi "gözlükle" bakması gerektiği talimatını verir.
+*   **ADR & Standart Entegrasyonu:** Hakem, şirketin Architectural Decision Records (ADR) dosyalarını ve kodlama standartlarını sisteme yükler. Bu sayede, hakem, kodun sadece sözdizimsel doğruluğunu değil, mimari uyumunu ve iş mantığını da "akıl yürüterek" denetleyebilir.
+*   **Knowledge Graph Oluşturma:** Sadece değişen dosyayı değil; o dosyanın etkilediği diğer sınıfları, veri tabanı şemalarını ve bağımlılıkları bir "bağlam grafiği" olarak analiz eder. Bu sayede, hakem, kodun sadece sözdizimsel doğruluğunu değil, mimari uyumunu ve iş mantığını da "akıl yürüterek" denetleyebilir.
+*   **Rubric Injection:** Önceden tanımladığımız değerlendirme matrisleri (Rubrics), bu aşamada modele hangi "gözlükle" bakması gerektiği talimatını verir. Bu sayede, hakem, kodun sadece sözdizimsel doğruluğunu değil, mimari uyumunu ve iş mantığını da "akıl yürüterek" denetleyebilir.
 
 ### Multi-Stage Reasoning (Çok Aşamalı Akıl Yürütme)
 Kodun doğruluğuna tek bir seferde karar vermek yerine, modeller arası bir "tartışma" süreci işletilir.
-*   **Eleştiri ve Savunma:** Birinci model (Critic) hataları listelerken, ikinci bir model bu bulguları test eder: "Bu gerçekten bir hata mı yoksa performans için yapılmış bilinçli bir tercih mi?"
-*   **Chain-of-Thought (CoT):** Judge (Hakem) model, bu tartışmayı izler ve kararın mantıksal adımlarını kağıda döker.
+*   **Eleştiri ve Savunma:** Birinci model (Critic) hataları listelerken, ikinci bir model bu bulguları test eder: "Bu gerçekten bir hata mı yoksa performans için yapılmış bilinçli bir tercih mi?" Bu sayede, hakem, kodun sadece sözdizimsel doğruluğunu değil, mimari uyumunu ve iş mantığını da "akıl yürüterek" denetleyebilir.
+*   **Chain-of-Thought (CoT):** Judge (Hakem) model, bu tartışmayı izler ve kararın mantıksal adımlarını kağıda döker. Bu sayede, hakem, kodun sadece sözdizimsel doğruluğunu değil, mimari uyumunu ve iş mantığını da "akıl yürüterek" denetleyebilir.
 
 ### Decision & Feedback Generation (Karar ve Geri Bildirim Üretimi)
 Analizi bir geliştiricinin veya AI ajanının anlayabileceği yapılandırılmış bir rapora dönüştürür.
-*   **Structured Output:** Karar, makineler tarafından okunabilmesi için JSON formatında üretilir.
-*   **Narrative Feedback:** Geliştiriciye sadece "hatalı" demez; "Bu yaklaşım N+1 problemine yol açıyor, onun yerine şu Query yapısını kullanmalısın" şeklinde mentorluk yapar.
+*   **Structured Output:** Karar, makineler tarafından okunabilmesi için JSON formatında üretilir. Bu sayede, hakem, kodun sadece sözdizimsel doğruluğunu değil, mimari uyumunu ve iş mantığını da "akıl yürüterek" denetleyebilir.
+*   **Narrative Feedback:** Geliştiriciye sadece "hatalı" demez; "Bu yaklaşım N+1 problemine yol açıyor, onun yerine şu Query yapısını kullanmalısın" şeklinde mentorluk yapar. Bu sayede, hakem, kodun sadece sözdizimsel doğruluğunu değil, mimari uyumunu ve iş mantığını da "akıl yürüterek" denetleyebilir.
 
 ## 2. Paradigma Değişimi: Geleneksel CI/CD vs. LLM-as-a-Judge
 
-2026'nın modern geliştirme hattı hem geleneksel hem de LLM tabanlı kontrolleri birleştirir; ancak roller keskindir.
+2026'nın modern geliştirme hattı hem geleneksel hem de LLM tabanlı kontrolleri birleştirir; ancak roller keskindir. Geleneksel CI/CD araçları (Linter, Unit Test) kodun sözdizimsel doğruluğunu ve test kapsamını kontrol ederken, LLM-as-a-Judge mimarisi kodun mimari uyumunu ve iş mantığını "akıl yürüterek" denetler.
+
+Aşağıdaki tabloda, geleneksel CI/CD ve LLM-as-a-Judge mimarilerinin karşılaştırması yer almaktadır.
 
 | Karşılaştırma Alanı | Geleneksel CI/CD (Linter, Unit Test) | LLM-as-a-Judge (Bilişsel Denetim) |
 | :--- | :--- | :--- |
@@ -42,21 +46,27 @@ Analizi bir geliştiricinin veya AI ajanının anlayabileceği yapılandırılm�
 
 ## 3. Akıl Yürütme İzlenebilirliği (Reasoning Traceability)
 
-LLM-as-a-Judge mimarisini geleneksel testlerden ayıran en büyük fark, kararın arkasındaki "neden-sonuç" ilişkisini sunabilmesidir. Hakem model, bir kod bloğunu reddettiğinde bunu sadece bir kural ihlali olarak değil, mimari bir argümanla sunar.
+LLM-as-a-Judge mimarisini geleneksel testlerden ayıran en büyük fark, kararın arkasındaki "neden-sonuç" ilişkisini sunabilmesidir. Hakem model, bir kod bloğunu reddettiğinde bunu sadece bir kural ihlali olarak değil, mimari bir argümanla sunar. Bu sayede, geliştirici sadece hatayı düzeltmekle kalmaz, sistemin geleceğine dair bir farkındalık kazanır.
 
-Örnek olarak; "Bu değişiklik teknik olarak doğru olsa da, veritabanı katmanındaki N+1 sorgu problemini tetikliyor ve mevcut ölçekleme vizyonumuzla çelişiyor" şeklinde bir geri bildirim sunar. Bu, geliştiricinin sadece hatayı düzeltmesini değil, sistemin geleceğine dair bir farkındalık kazanmasını sağlar.
+Örnek olarak; "Bu değişiklik teknik olarak doğru olsa da, veritabanı katmanındaki N+1 sorgu problemini tetikliyor ve mevcut ölçekleme vizyonumuzla çelişiyor" şeklinde bir geri bildirim sunar. Bu, geliştiricinin sadece hatayı düzeltmesini değil, sistemin geleceğine dair bir farkındalık kazanmasını sağlar. 
 
 ## 4. Kullanım Örneği: Bağlamsal Güvenlik ve Mimari Uyum
 
+Bu bölümde, LLM-as-a-Judge mimarisinin gerçek dünyada nasıl kullanıldığını inceleyelim.
+
 Bir geliştiricinin ödeme sistemine "Retry Mechanism" eklediğini düşünelim.
 
-*   **Geleneksel CI/CD:** Kodun derlendiğini ve unit testlerin geçtiğini onaylar.
-*   **LLM-as-a-Judge:** Projenin finansal standartlarını bildiği için şunu fark eder: "Kod tekrar deneme yapıyor ancak ağ zaman aşımlarında mükerrer çekim riskini engelleyecek idempotency key bilgisini göndermiyor. Bu, FIN-003 kodlu tutarlılık standardımızı ihlal ediyor" şeklinde geri bildirim sunar.
-*   **Sonuç:** PR, teknik değil mimari bir gerekçeyle otomatik olarak reddedilir.
+*   **Geleneksel CI/CD:** Kodun derlendiğini ve unit testlerin geçtiğini onaylar. Ancak, kodun mimari uyumunu ve iş mantığını "akıl yürüterek" denetleyemez.
+*   **LLM-as-a-Judge:** Projenin finansal standartlarını ve mimari standartlarını bildiği için şunu fark eder: "Kod tekrar deneme yapıyor ancak ağ zaman aşımlarında mükerrer çekim riskini engelleyecek idempotency key bilgisini göndermiyor. Bu, finansal tutarlılık standardımızı ihlal ediyor" şeklinde geri bildirim sunar.
+*   **Sonuç:** PR, teknik değil mimari bir gerekçeyle otomatik olarak reddedilir. Geliştirici, hatayı düzeltmekle kalmaz, sistemin geleceğine dair bir farkındalık kazanır.
+
+Bu örnekte, LLM-as-a-Judge mimarisinin geleneksel CI/CD araçlarından farkını net bir şekilde görebiliriz.
 
 ## 5. Değerlendirme Katmanı: Mimari Rubric Tasarımı
 
 Hakemi eğitmek için kullandığımız rubric'ler, artık yaşayan birer dokümandır.
+
+Peki rubric nedir ve nasıl tasarlanır? Rubric, hakemin kod kalitesini değerlendirmek için kullandığı bir dizi kriterdir. Bu kriterler, projenin mimari standartlarını ve iş kurallarını yansıtır. Rubric'ler tasarlanırken dikkat edilmesi gereken en önemli nokta, kriterlerin açık ve anlaşılır olmasıdır. Ayrıca, her kriter için farklı puanlama seviyeleri belirlenmelidir. Bu sayede, hakem, kod kalitesini daha doğru bir şekilde değerlendirebilir. Örnek olarak, bir ödeme sistemi için hazırlanmış bir rubric aşağıda yer almaktadır.
 
 | Kriter | 1 Puan (Red) | 3 Puan (Geliştirilmeli) | 5 Puan (Onay) |
 | :--- | :--- | :--- | :--- |
@@ -65,18 +75,19 @@ Hakemi eğitmek için kullandığımız rubric'ler, artık yaşayan birer doküm
 | **Domain Integrity** | Alan modelleri DB şemasıyla iç içe. | Domain dili var ama iş kuralları sızmış. | DDD ve Ubiquitous Language'e tam uyum. |
 | **Mimari Sınırlar** | Hücre dışı (Cross-cell) DB/API erişimi var. | Erişim var ama asenkron/proxy ile yapılmış. | Hücresel Mimari sınırlarına tam uyum. |
 
+Bu puanlama sistemi, hakemin kod kalitesini daha doğru bir şekilde değerlendirmesini sağlar. 
 
 ## 6. Hibrit Denetim: Human-in-the-loop (HITL) Entegrasyonu
 
 Otonom bir hakem katmanı, insanı süreçten çıkarmaz; insanın rolünü "hakemlerin hakemi" seviyesine taşır. HITL katmanı, Judge LLM'in güven puanının (confidence score) düşük olduğu durumlarda devreye girer. Geliştirici burada bir "kod yazıcısı" değil, AI'ın verdiği kararı denetleyen bir "mimari otorite" olarak konumlanır.
 
-En nihayetinde insan faktörünü tamamen ortadan kaldırmak istersek Judge LLM'in güven puanını artırmak için neler yapmalıyız? Ya da arttırmalı mıyız? Bu sorunun cevabı ise tamamen tartışmalı bir konu ve her organizasyonun kendi ihtiyaçlarına göre cevaplaması gereken bir soru.
+En nihayetinde insan faktörünü tamamen ortadan kaldırmak istersek Judge LLM'in güven puanını artırmak için neler yapmalıyız? Ya da arttırmalı mıyız? Bu sorunun cevabı ise tamamen tartışmalı bir konu ve her organizasyonun kendi ihtiyaçlarına göre cevaplaması gereken bir soru bence.
 
 
 ## 7. Uygulama Rehberi: Geliştiriciler İçin Yol Haritası
 
 *   **Hibrit Yapı:** Linter'lar basit hataları elerken, LLM Judge mimariye odaklansın.
-*   **Rubric Mühendisliği:** Şirketin teknik vizyonu bu tablolara işlenmelidir.
+*   **Rubric Mühendisliği:** Organizasyonun teknik vizyonu bu tablolara işlenmelidir. 
 *   **Golden Files:** Hakeme projenizdeki "mükemmel" kod örneklerini referans tanıtın.
 *   **Audit Log:** Hakemin kararlarını düzenli olarak kıdemli geliştiricilerle gözden geçirin.
 
@@ -85,3 +96,7 @@ En nihayetinde insan faktörünü tamamen ortadan kaldırmak istersek Judge LLM'
 2026 yılında geliştiricilik, bir bitişe değil, çok daha stratejik bir başlangıca işaret ediyor. Yapay zeka kodu yazarken, bizler bu kodun içine felsefeyi, estetiği ve mimari ruhu üfleyen tasarımcılar haline geliyoruz.
 
 Artık vaktimizi sözdizimi hatalarını düzeltmekle değil, "kaliteyi otonomlaştıran sistemler tasarlamakla" harcıyoruz. AI bizim yerimize kod yazmıyor; AI bizim uzmanlık standartlarımızı ölçeklendiriyor. Bizler artık teknolojinin nereye gideceğine karar veren, kaliteyi dijital bir anayasaya (rubric) dönüştüren ve bu devasa orkestrayı yöneten stratejik mimarlarız.
+
+[Evren Tan][evren-tan-homepage] - Software Crafter
+
+[evren-tan-homepage]: https://evrentan.com
